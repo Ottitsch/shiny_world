@@ -1,0 +1,12 @@
+name: shiny_world
+title: shiny_world
+username: ottitsch
+account: ottitsch
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14842574
+bundleId: 10358161
+url: https://ottitsch.shinyapps.io/shiny_world/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
