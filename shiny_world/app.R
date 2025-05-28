@@ -4,9 +4,9 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(DT)
-library(viridis)        # for scale_fill_viridis_c()
-library(maps)           # for map_data()
-library(countrycode)    # to get ISO3 codes
+library(viridis)
+library(maps)
+library(countrycode)
 
 # Load CIA Factbook data
 cia <- fromJSON("data.json")
@@ -46,7 +46,7 @@ ui <- fluidPage(
         ),
         mainPanel(
           tabsetPanel(
-            tabPanel("Map", plotlyOutput("uni_map")),
+            tabPanel("Map", plotlyOutput("uni_map", width = "90%", height = "60vh")),
             tabPanel("Global analysis",
               fluidRow(
                 # Histogram + density on left
@@ -100,7 +100,23 @@ server <- function(input, output, session) {
     p <- ggplot(map_df, aes(long, lat, group = group, fill = .data[[uni_col()]])) +
       geom_polygon(colour = "white") +
       scale_fill_viridis_c(name = names(var_choices)[var_choices == uni_col()]) +
-      theme_void()
+      coord_quickmap(
+        xlim = c(-10, 10),
+        ylim = c(-10, 15)
+      ) +
+      coord_fixed(ratio = 1.3) +
+      labs(
+        x = "long",
+        y = "lat",
+        fill = names(var_choices)[var_choices == uni_col()]
+      ) +
+      theme_minimal() +
+      theme(
+        panel.background = element_rect(fill="white", colour=NA),
+        panel.border     = element_rect(colour="black", fill=NA, size=1),
+        panel.grid.major = element_line(color="grey80", size=0.3),
+        axis.text        = element_text(color="grey20")
+      )
     ggplotly(p, tooltip = c("region", uni_col()))
   })
 
@@ -117,7 +133,7 @@ server <- function(input, output, session) {
   # Global histogram + density (left side)
   output$uni_hist_den <- renderPlotly({
     p <- ggplot(cia, aes(x = .data[[uni_col()]])) +
-      geom_histogram(aes(y = ..density..), bins = 30, fill = "grey80", color = "grey90") +
+      geom_histogram(aes(y = ..density..), bins = 30, fill = "grey80", color = "grey70") +
       geom_density(fill = "steelblue", alpha = 0.4) +
       labs(x = names(var_choices)[var_choices == uni_col()], y = "Density") +
       theme_minimal() +
