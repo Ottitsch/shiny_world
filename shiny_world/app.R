@@ -166,8 +166,7 @@ server <- function(input, output, session) {
     xcol <- input$x_var; ycol <- input$y_var; sz <- input$size_var
     p <- ggplot(cia, aes(x = .data[[xcol]], y = .data[[ycol]], size = .data[[sz]], color = continent)) +
       geom_point() +
-      geom_smooth(method = "loess", se = FALSE, color = "black", inherit.aes = FALSE,
-                  aes(x = .data[[xcol]], y = .data[[ycol]])) +
+      geom_smooth(method = "loess", se = FALSE, aes(color = continent, group = continent), size = 0.7) +
       labs(x = names(var_choices)[var_choices==xcol],
            y = names(var_choices)[var_choices==ycol],
            size = names(size_choices)[size_choices==sz]) +
