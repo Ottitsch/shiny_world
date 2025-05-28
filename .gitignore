@@ -1,0 +1,43 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+
+# RStudio files
+.Rproj.user/
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio project files (not ignored, but listed for clarity)
+!*.Rproj
+
+# Shiny application logs
+shinyapps.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Other common data files
+*.csv
+*.tsv
+*.rds
+*.rda
+*.pdf
+*.html
+*.zip
+*.tar 
