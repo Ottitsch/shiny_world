@@ -46,18 +46,22 @@ ui <- fluidPage(
         ),
         mainPanel(
           tabsetPanel(
-            tabPanel("Map", plotlyOutput("uni_map", width = "90%", height = "60vh")),
+            tabPanel("Map", 
+            br(),
+            tags$p(
+                "The map contains values of the selected variables. ",
+                "The countries with gray areas have a missing value for the visualized variable.",
+                style = "color: #666; font-style: italic; margin-bottom: 10px;"
+            ),
+            plotlyOutput("uni_map", width = "90%", height = "60vh")),
             tabPanel("Global analysis",
               fluidRow(
-                # Histogram + density on left
                 column(6, plotlyOutput("uni_hist_den")),
-                # Boxplot on right
                 column(6, plotlyOutput("uni_box"))
               )
             ),
             tabPanel("Analysis per continent",
               fluidRow(
-                # Swap: density left, boxplot right
                 column(6, plotlyOutput("uni_dens_cont")),
                 column(6, plotlyOutput("uni_box_cont"))
               )
@@ -76,6 +80,11 @@ ui <- fluidPage(
           selectInput("size_var", "Point size by:", choices = size_choices)
         ),
         mainPanel(
+            br(),
+            tags$p(
+                "Scatterplot",
+                style = "font-size: 24px; font-style: bold;"
+            ),
           plotlyOutput("multi_scatter")
         )
       )
